@@ -6,7 +6,7 @@ const Services = () => {
     {
       icon: Heart,
       title: "Weddings",
-      description: "Celebrate your love with a personalized ceremony that reflects your unique journey together. Every detail crafted with care and joy.",
+      description: "Celebrate your love with a personalised ceremony that reflects your unique journey together. Every detail crafted with care and joy.",
     },
     {
       icon: Users,
