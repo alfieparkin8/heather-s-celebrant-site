@@ -13,8 +13,8 @@ const Hero = () => {
           </h1>
           <p className="text-xl text-muted-foreground leading-relaxed">
             Creating meaningful ceremonies for life's most important moments. 
-            As a registered celebrant, I officiate weddings, funerals, and vow renewals 
-            with warmth, compassion, and professionalism.
+            As a registered celebrant, I officiate weddings, funerals and vow renewals 
+            with warmth, compassion and professionalism.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 pt-4">
             <Button 
