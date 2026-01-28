@@ -1,6 +1,5 @@
 import { Phone, Mail } from "lucide-react";
 import heatherPortrait from "@/assets/heather-portrait.png";
-import TestimonialCarousel from "./TestimonialCarousel";
 const Hero = () => {
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
@@ -63,14 +62,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Testimonials Section */}
-        <div className="animate-fade-in delay-300">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl md:text-4xl text-foreground mb-3">Kind Words</h2>
-            
-          </div>
-          <TestimonialCarousel />
-        </div>
       </div>
     </section>;
 };
