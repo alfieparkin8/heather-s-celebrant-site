@@ -1,15 +1,11 @@
 import { useState } from "react";
 import { Phone, Mail, ChevronDown, ChevronUp } from "lucide-react";
-
 const Footer = () => {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
-
   const currentYear = new Date().getFullYear();
-
-  return (
-    <footer className="relative">
+  return <footer className="relative">
       {/* Gradient background */}
-      <div className="footer-gradient py-16 px-6">
+      <div className="footer-gradient py-16 px-6 bg-primary">
         <div className="container mx-auto">
           {/* Main footer content */}
           <div className="grid md:grid-cols-3 gap-12 mb-12">
@@ -27,17 +23,11 @@ const Footer = () => {
             <div className="space-y-4">
               <h4 className="font-serif text-lg text-primary-foreground">Quick Contact</h4>
               <div className="space-y-3">
-                <a
-                  href="tel:07975945831"
-                  className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
-                >
+                <a href="tel:07975945831" className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">
                   <Phone className="w-4 h-4" />
                   07975 945831
                 </a>
-                <a
-                  href="mailto:heather@heatherblisscelebrant.co.uk"
-                  className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm"
-                >
+                <a href="mailto:heather@heatherblisscelebrant.co.uk" className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">
                   <Mail className="w-4 h-4" />
                   heather@heatherblisscelebrant.co.uk
                 </a>
@@ -58,19 +48,12 @@ const Footer = () => {
 
           {/* Privacy Policy Accordion */}
           <div className="border-t border-primary-foreground/20 pt-8">
-            <button
-              onClick={() => setIsPrivacyOpen(!isPrivacyOpen)}
-              className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm mb-4"
-            >
+            <button onClick={() => setIsPrivacyOpen(!isPrivacyOpen)} className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm mb-4">
               {isPrivacyOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               Privacy Policy
             </button>
 
-            <div
-              className={`overflow-hidden transition-all duration-500 ${
-                isPrivacyOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
+            <div className={`overflow-hidden transition-all duration-500 ${isPrivacyOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"}`}>
               <div className="glass-card bg-primary-foreground/10 text-primary-foreground/90 text-sm space-y-3 mb-6">
                 <h5 className="font-semibold text-primary-foreground">Privacy & Data Protection</h5>
                 <p>
@@ -101,8 +84,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;
