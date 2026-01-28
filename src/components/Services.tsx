@@ -1,55 +1,164 @@
-import { Heart, Users, Sparkles } from "lucide-react";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Heart, Sparkles, Flower2, Star } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      icon: Heart,
+      category: "celebration",
       title: "Weddings",
-      description: "Celebrate your love with a personalised ceremony that reflects your unique journey together. Every detail crafted with care and joy.",
+      subtitle: "Celebrate Your Love Story",
+      icon: Heart,
+      description: "Your wedding day should reflect everything that makes your love unique. I work closely with you to craft a ceremony that tells your story—from how you met to your dreams for the future.",
+      features: [
+        "Personalised vows and readings",
+        "Symbolic rituals of your choosing",
+        "Inclusive of all beliefs and traditions",
+        "Rehearsal support included",
+      ],
     },
     {
-      icon: Users,
-      title: "Funerals",
-      description: "Honor your loved one with a dignified, compassionate service that celebrates their life and brings comfort to family and friends.",
-    },
-    {
-      icon: Sparkles,
+      category: "celebration",
       title: "Vow Renewals",
-      description: "Reaffirm your commitment and celebrate your enduring love with a meaningful ceremony that marks your continued journey together.",
+      subtitle: "Reaffirm Your Journey Together",
+      icon: Sparkles,
+      description: "Whether marking a milestone anniversary or simply celebrating your continued commitment, a vow renewal is a beautiful way to honour your journey and look forward to the years ahead.",
+      features: [
+        "Reflection on your shared journey",
+        "Updated personal vows",
+        "Family involvement options",
+        "Intimate or grand celebrations",
+      ],
+    },
+    {
+      category: "memorial",
+      title: "Funerals",
+      subtitle: "A Celebration of Life",
+      icon: Flower2,
+      description: "Saying goodbye is never easy, but a meaningful service can bring comfort and closure. I create dignified ceremonies that honour your loved one's life, spirit, and the impact they had on those around them.",
+      features: [
+        "Personal tributes and eulogies",
+        "Music and readings of your choice",
+        "Cultural and religious sensitivity",
+        "Support through the planning process",
+      ],
+    },
+    {
+      category: "memorial",
+      title: "Memorial Services",
+      subtitle: "Honouring Cherished Memories",
+      icon: Star,
+      description: "Sometimes circumstances don't allow for an immediate service, or families wish to gather again to remember. Memorial services offer a meaningful opportunity to celebrate and reflect.",
+      features: [
+        "Flexible timing and location",
+        "Collaborative storytelling",
+        "Memory-sharing opportunities",
+        "Personalised keepsakes",
+      ],
     },
   ];
 
   return (
-    <section className="py-20 px-6 bg-secondary/20">
-      <div className="max-w-6xl mx-auto">
+    <section id="services" className="py-20 px-6 relative">
+      <div className="container mx-auto">
         <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl mb-4">My Services</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Professional ceremony services tailored to your needs and wishes
+          <p className="text-primary font-medium tracking-wide uppercase text-sm mb-4">
+            Services
+          </p>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
+            Ceremonies for Life's
+            <span className="block text-primary">Most Precious Moments</span>
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            Every ceremony is crafted with care, attention to detail, and a deep 
+            respect for the moment you're marking.
           </p>
         </div>
-        
-        <div className="grid md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <Card 
-              key={service.title} 
-              className="border-2 hover:border-primary hover:shadow-elegant transition-all duration-300 animate-fade-in-up bg-card/80 backdrop-blur-sm"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              <CardHeader>
-                <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <service.icon className="w-8 h-8 text-primary" />
+
+        {/* Celebrations Section */}
+        <div className="mb-16">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-water to-transparent" />
+            <h3 className="text-xl font-serif text-water px-4">Celebrations of Love</h3>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-water to-transparent" />
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {services
+              .filter((s) => s.category === "celebration")
+              .map((service, index) => (
+                <div
+                  key={service.title}
+                  className="glass-card group hover:shadow-glow transition-all duration-500 theme-celebration animate-fade-in-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 rounded-xl bg-water/20 text-sky group-hover:bg-water/30 transition-colors">
+                      <service.icon className="w-7 h-7" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-2xl text-foreground group-hover:text-primary transition-colors">
+                        {service.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">{service.subtitle}</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+                  <ul className="space-y-2">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2 text-sm text-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-water" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-                <CardTitle className="text-2xl">{service.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-base leading-relaxed">
-                  {service.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
-          ))}
+              ))}
+          </div>
+        </div>
+
+        {/* Memorial Section */}
+        <div>
+          <div className="flex items-center gap-3 mb-8">
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+            <h3 className="text-xl font-serif text-primary px-4">Honouring Lives</h3>
+            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-8">
+            {services
+              .filter((s) => s.category === "memorial")
+              .map((service, index) => (
+                <div
+                  key={service.title}
+                  className="glass-card group hover:shadow-glow transition-all duration-500 theme-memorial animate-fade-in-up"
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <div className="flex items-start gap-4 mb-4">
+                    <div className="p-3 rounded-xl bg-primary/20 text-primary group-hover:bg-primary/30 transition-colors">
+                      <service.icon className="w-7 h-7" />
+                    </div>
+                    <div>
+                      <h4 className="font-serif text-2xl text-foreground group-hover:text-primary transition-colors">
+                        {service.title}
+                      </h4>
+                      <p className="text-sm text-muted-foreground">{service.subtitle}</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    {service.description}
+                  </p>
+                  <ul className="space-y-2">
+                    {service.features.map((feature) => (
+                      <li key={feature} className="flex items-center gap-2 text-sm text-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </section>
