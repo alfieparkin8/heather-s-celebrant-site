@@ -1,8 +1,6 @@
 import { Heart, Users, Leaf } from "lucide-react";
-
 const About = () => {
-  return (
-    <section id="about" className="py-20 px-6 relative">
+  return <section id="about" className="py-20 px-6 relative">
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Story Content */}
@@ -11,9 +9,8 @@ const About = () => {
               <p className="text-primary font-medium tracking-wide uppercase text-sm">
                 About Me
               </p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground">
-                Your Guide Through Life's
-                <span className="block text-primary">Beautiful Moments</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground">Your Guide Through Life's
+Beautiful Moments<span className="block text-primary">Beautiful Moments</span>
               </h2>
             </div>
 
@@ -41,31 +38,24 @@ const About = () => {
 
           {/* Values Cards */}
           <div className="space-y-6 animate-fade-in-up">
-            {[
-              {
-                icon: Heart,
-                title: "Empathy",
-                description: "Every ceremony begins with understanding. I listen with an open heart to create something truly meaningful.",
-                color: "text-primary",
-              },
-              {
-                icon: Users,
-                title: "Connection",
-                description: "I believe in building genuine relationships with the families I serve, creating trust and comfort.",
-                color: "text-sky",
-              },
-              {
-                icon: Leaf,
-                title: "Bespoke Storytelling",
-                description: "No two ceremonies are alike. Each one is crafted to reflect your unique journey and personality.",
-                color: "text-water",
-              },
-            ].map((value, index) => (
-              <div
-                key={value.title}
-                className="glass-card flex gap-5 items-start group hover:shadow-glow transition-all duration-500"
-                style={{ animationDelay: `${index * 150}ms` }}
-              >
+            {[{
+            icon: Heart,
+            title: "Empathy",
+            description: "Every ceremony begins with understanding. I listen with an open heart to create something truly meaningful.",
+            color: "text-primary"
+          }, {
+            icon: Users,
+            title: "Connection",
+            description: "I believe in building genuine relationships with the families I serve, creating trust and comfort.",
+            color: "text-sky"
+          }, {
+            icon: Leaf,
+            title: "Bespoke Storytelling",
+            description: "No two ceremonies are alike. Each one is crafted to reflect your unique journey and personality.",
+            color: "text-water"
+          }].map((value, index) => <div key={value.title} className="glass-card flex gap-5 items-start group hover:shadow-glow transition-all duration-500" style={{
+            animationDelay: `${index * 150}ms`
+          }}>
                 <div className={`p-3 rounded-xl bg-background ${value.color}`}>
                   <value.icon className="w-6 h-6" />
                 </div>
@@ -77,13 +67,10 @@ const About = () => {
                     {value.description}
                   </p>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default About;

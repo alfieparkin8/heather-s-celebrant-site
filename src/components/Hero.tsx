@@ -1,17 +1,16 @@
 import { Phone, Mail } from "lucide-react";
 import heatherPortrait from "@/assets/heather-portrait.png";
 import TestimonialCarousel from "./TestimonialCarousel";
-
 const Hero = () => {
   const scrollToContact = () => {
     const element = document.querySelector("#contact");
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+      element.scrollIntoView({
+        behavior: "smooth"
+      });
     }
   };
-
-  return (
-    <section id="home" className="min-h-screen pt-24 pb-16 px-6 relative">
+  return <section id="home" className="min-h-screen pt-24 pb-16 px-6 relative">
       <div className="container mx-auto">
         {/* Hero Content */}
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
@@ -34,17 +33,11 @@ const Hero = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
-              <button
-                onClick={scrollToContact}
-                className="btn-pill-primary inline-flex items-center justify-center gap-2 text-base"
-              >
+              <button onClick={scrollToContact} className="btn-pill-primary inline-flex items-center justify-center gap-2 text-base">
                 <Phone className="w-5 h-5" />
                 Book a Consultation
               </button>
-              <a
-                href="mailto:heather@heatherblisscelebrant.co.uk"
-                className="btn-pill-secondary inline-flex items-center justify-center gap-2 text-base"
-              >
+              <a href="mailto:heather@heatherblisscelebrant.co.uk" className="btn-pill-secondary inline-flex items-center justify-center gap-2 text-base">
                 <Mail className="w-5 h-5" />
                 Email Me
               </a>
@@ -52,14 +45,9 @@ const Hero = () => {
 
             {/* Service badges */}
             <div className="flex flex-wrap gap-3 pt-4">
-              {["Weddings", "Funerals", "Vow Renewals", "Memorials"].map((service) => (
-                <span
-                  key={service}
-                  className="px-4 py-2 rounded-full text-sm bg-secondary/50 text-foreground border border-border"
-                >
+              {["Weddings", "Funerals", "Vow Renewals", "Memorials"].map(service => <span key={service} className="px-4 py-2 rounded-full text-sm bg-secondary/50 text-foreground border border-border">
                   {service}
-                </span>
-              ))}
+                </span>)}
             </div>
           </div>
 
@@ -67,11 +55,7 @@ const Hero = () => {
           <div className="relative animate-fade-in-up lg:order-last">
             <div className="img-hover-zoom relative max-w-md mx-auto lg:max-w-none">
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-sky/20 to-water/20 rounded-2xl transform rotate-3 scale-105" />
-              <img
-                src={heatherPortrait}
-                alt="Heather Bliss - Professional Celebrant in Bedfordshire"
-                className="relative w-full h-auto rounded-2xl shadow-elevated"
-              />
+              <img src={heatherPortrait} alt="Heather Bliss - Professional Celebrant in Bedfordshire" className="relative w-full h-auto rounded-2xl shadow-elevated" />
             </div>
             {/* Decorative elements */}
             <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-primary/10 rounded-full blur-3xl -z-10" />
@@ -83,13 +67,11 @@ const Hero = () => {
         <div className="animate-fade-in delay-300">
           <div className="text-center mb-10">
             <h2 className="text-3xl md:text-4xl text-foreground mb-3">Kind Words</h2>
-            <p className="text-muted-foreground">From families I've had the honour to serve</p>
+            
           </div>
           <TestimonialCarousel />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;
