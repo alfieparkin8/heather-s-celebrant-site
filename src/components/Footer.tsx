@@ -1,36 +1,81 @@
 import { useState } from "react";
-import { Phone, Mail, ChevronDown, ChevronUp } from "lucide-react";
+import { Phone, Mail, MapPin, ChevronDown, ChevronUp } from "lucide-react";
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
   const currentYear = new Date().getFullYear();
-  return <footer className="relative">
+
+  return (
+    <footer className="relative">
       {/* Gradient background */}
       <div className="footer-gradient py-16 px-6 bg-primary">
         <div className="container mx-auto">
           {/* Main footer content */}
-          <div className="grid md:grid-cols-3 gap-12 mb-12">
+          <div className="grid md:grid-cols-4 gap-8 mb-12">
             {/* Brand */}
-            <div className="space-y-4">
+            <div className="md:col-span-1 space-y-4">
               <h3 className="font-serif text-2xl text-primary-foreground">Heather Bliss</h3>
               <p className="text-primary-foreground/80 text-sm leading-relaxed">
-                Registered Celebrant creating meaningful ceremonies for weddings, 
-                vow renewals, funerals, and memorials across Bedfordshire, 
-                Northamptonshire, and Buckinghamshire.
+                Professional Celebrant creating meaningful ceremonies across Bedfordshire, Buckinghamshire and Northamptonshire.
               </p>
+              <div className="pt-4">
+                <img 
+                  src="https://www.samphirecelebrants.org/images/logo_green_short_borderless.png" 
+                  alt="Samphire Celebrants Certification" 
+                  className="h-16 opacity-80"
+                />
+              </div>
             </div>
 
-            {/* Quick Contact */}
+            {/* Quick Links */}
             <div className="space-y-4">
-              <h4 className="font-serif text-lg text-primary-foreground">Quick Contact</h4>
+              <h4 className="font-serif text-lg text-primary-foreground">Quick Links</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <Link to="/" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/funerals-memorials" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    Funerals & Memorials
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/weddings-vows" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    Weddings & Vow Renewals
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/privacy-policy" className="text-primary-foreground/80 hover:text-primary-foreground transition-colors">
+                    Privacy Policy
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div className="space-y-4">
+              <h4 className="font-serif text-lg text-primary-foreground">Get in Touch</h4>
               <div className="space-y-3">
-                <a href="tel:07975945831" className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">
-                  <Phone className="w-4 h-4" />
-                  07975 945831
+                <a href="tel:+447748113636" className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">
+                  <Phone className="w-4 h-4 flex-shrink-0" />
+                  +44 7748 113636
                 </a>
                 <a href="mailto:heather@heatherblisscelebrant.co.uk" className="flex items-center gap-3 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm">
-                  <Mail className="w-4 h-4" />
+                  <Mail className="w-4 h-4 flex-shrink-0" />
                   heather@heatherblisscelebrant.co.uk
                 </a>
+                <div className="flex items-start gap-3 text-primary-foreground/80 text-sm">
+                  <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                  <span>Based in Bedford, covering Bedfordshire, Buckinghamshire & Northamptonshire</span>
+                </div>
               </div>
             </div>
 
@@ -48,7 +93,10 @@ const Footer = () => {
 
           {/* Privacy Policy Accordion */}
           <div className="border-t border-primary-foreground/20 pt-8">
-            <button onClick={() => setIsPrivacyOpen(!isPrivacyOpen)} className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm mb-4">
+            <button 
+              onClick={() => setIsPrivacyOpen(!isPrivacyOpen)} 
+              className="flex items-center gap-2 text-primary-foreground/80 hover:text-primary-foreground transition-colors text-sm mb-4"
+            >
               {isPrivacyOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               Privacy Policy
             </button>
@@ -78,12 +126,11 @@ const Footer = () => {
             <p className="text-sm text-primary-foreground/60">
               © {currentYear} Heather Bliss Celebrant. All rights reserved.
             </p>
-            <p className="text-xs text-primary-foreground/40 mt-2">
-              Registered Celebrant serving Bedford, Northampton, Milton Keynes & surrounding areas
-            </p>
           </div>
         </div>
       </div>
-    </footer>;
+    </footer>
+  );
 };
+
 export default Footer;

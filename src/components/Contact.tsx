@@ -1,51 +1,40 @@
-import { useState } from "react";
-import { Phone, Mail, MapPin, Send, Calendar, User, MessageSquare } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+import { useState, useRef } from "react";
+import { Phone, Mail, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
+import emailjs from "@emailjs/browser";
+
+// EmailJS credentials
+const EMAILJS_SERVICE_ID = "service_ih410ws";
+const EMAILJS_TEMPLATE_ID = "template_9zcnqib";
+const EMAILJS_PUBLIC_KEY = "2vrQzO3hLky-twvXV";
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    serviceType: "",
-    eventDate: "",
-    location: "",
-    message: "",
-    contactMethod: "email",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isSending, setIsSending] = useState(false);
+  const [sendStatus, setSendStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitting(true);
+    
+    if (!formRef.current) return;
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    setIsSending(true);
+    setSendStatus("idle");
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. I'll be in touch soon.",
-    });
-
-    setFormData({
-      name: "",
-      email: "",
-      phone: "",
-      serviceType: "",
-      eventDate: "",
-      location: "",
-      message: "",
-      contactMethod: "email",
-    });
-    setIsSubmitting(false);
+    try {
+      await emailjs.sendForm(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        EMAILJS_PUBLIC_KEY
+      );
+      setSendStatus("success");
+      formRef.current.reset();
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      setSendStatus("error");
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -68,20 +57,37 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Contact Form */}
           <div className="glass-card animate-fade-in-up">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            {sendStatus === "success" && (
+              <div className="mb-6 p-4 rounded-lg bg-green-50 border border-green-200 flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-medium text-green-800">Message sent successfully!</p>
+                  <p className="text-sm text-green-600">I'll get back to you as soon as possible.</p>
+                </div>
+              </div>
+            )}
+            
+            {sendStatus === "error" && (
+              <div className="mb-6 p-4 rounded-lg bg-red-50 border border-red-200 flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 text-red-600 flex-shrink-0 mt-0.5" />
+                <div>
+                  <p className="font-medium text-red-800">Failed to send message</p>
+                  <p className="text-sm text-red-600">Please try again or email me directly.</p>
+                </div>
+              </div>
+            )}
+
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
               <div className="grid sm:grid-cols-2 gap-6">
                 {/* Name */}
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-foreground flex items-center gap-2">
-                    <User className="w-4 h-4 text-primary" />
+                  <label htmlFor="from_name" className="text-sm font-medium text-foreground">
                     Your Name *
                   </label>
                   <input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
+                    id="from_name"
+                    name="from_name"
                     required
                     className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
                     placeholder="Jane Smith"
@@ -90,16 +96,13 @@ const Contact = () => {
 
                 {/* Email */}
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-foreground flex items-center gap-2">
-                    <Mail className="w-4 h-4 text-primary" />
+                  <label htmlFor="from_email" className="text-sm font-medium text-foreground">
                     Email Address *
                   </label>
                   <input
                     type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
+                    id="from_email"
+                    name="from_email"
                     required
                     className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
                     placeholder="jane@example.com"
@@ -107,125 +110,47 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="grid sm:grid-cols-2 gap-6">
-                {/* Phone */}
-                <div className="space-y-2">
-                  <label htmlFor="phone" className="text-sm font-medium text-foreground flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-primary" />
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                    placeholder="07123 456789"
-                  />
-                </div>
-
-                {/* Service Type */}
-                <div className="space-y-2">
-                  <label htmlFor="serviceType" className="text-sm font-medium text-foreground">
-                    Service Type *
-                  </label>
-                  <select
-                    id="serviceType"
-                    name="serviceType"
-                    value={formData.serviceType}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                  >
-                    <option value="">Select a service...</option>
-                    <option value="wedding">Wedding Ceremony</option>
-                    <option value="vow-renewal">Vow Renewal</option>
-                    <option value="funeral">Funeral Service</option>
-                    <option value="memorial">Memorial Service</option>
-                    <option value="other">Other</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid sm:grid-cols-2 gap-6">
-                {/* Event Date */}
-                <div className="space-y-2">
-                  <label htmlFor="eventDate" className="text-sm font-medium text-foreground flex items-center gap-2">
-                    <Calendar className="w-4 h-4 text-primary" />
-                    Preferred Date
-                  </label>
-                  <input
-                    type="date"
-                    id="eventDate"
-                    name="eventDate"
-                    value={formData.eventDate}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                  />
-                </div>
-
-                {/* Location */}
-                <div className="space-y-2">
-                  <label htmlFor="location" className="text-sm font-medium text-foreground flex items-center gap-2">
-                    <MapPin className="w-4 h-4 text-primary" />
-                    Location/Venue
-                  </label>
-                  <input
-                    type="text"
-                    id="location"
-                    name="location"
-                    value={formData.location}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
-                    placeholder="Bedford, Northampton..."
-                  />
-                </div>
-              </div>
-
-              {/* Preferred Contact Method */}
+              {/* Service Type */}
               <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Preferred Contact Method</label>
-                <div className="flex gap-4">
-                  {["email", "phone", "either"].map((method) => (
-                    <label key={method} className="flex items-center gap-2 cursor-pointer">
-                      <input
-                        type="radio"
-                        name="contactMethod"
-                        value={method}
-                        checked={formData.contactMethod === method}
-                        onChange={handleChange}
-                        className="w-4 h-4 text-primary border-border focus:ring-primary"
-                      />
-                      <span className="text-sm capitalize">{method}</span>
-                    </label>
-                  ))}
-                </div>
+                <label htmlFor="service_type" className="text-sm font-medium text-foreground">
+                  Service Required *
+                </label>
+                <select
+                  id="service_type"
+                  name="service_type"
+                  required
+                  className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none"
+                >
+                  <option value="">Select a service...</option>
+                  <option value="Wedding">Wedding Ceremony</option>
+                  <option value="Vow Renewal">Vow Renewal</option>
+                  <option value="Funeral">Funeral Service</option>
+                  <option value="Memorial Service">Memorial Service</option>
+                  <option value="Other">Other</option>
+                </select>
               </div>
 
               {/* Message */}
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-foreground flex items-center gap-2">
-                  <MessageSquare className="w-4 h-4 text-primary" />
-                  Your Message
+                <label htmlFor="message" className="text-sm font-medium text-foreground">
+                  Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
+                  required
                   rows={4}
                   className="w-full px-4 py-3 rounded-xl border border-border bg-background/50 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all outline-none resize-none"
-                  placeholder="Tell me a little about what you're looking for..."
+                  placeholder="Tell me about your ceremony..."
                 />
               </div>
 
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSending}
                 className="btn-pill-primary w-full flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubmitting ? (
+                {isSending ? (
                   <>
                     <div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full animate-spin" />
                     Sending...
@@ -247,7 +172,7 @@ const Contact = () => {
               <h3 className="font-serif text-2xl text-foreground mb-6">Get in Touch Directly</h3>
               <div className="space-y-4">
                 <a
-                  href="tel:07975945831"
+                  href="tel:+447748113636"
                   className="flex items-center gap-4 p-4 rounded-xl bg-background/50 hover:bg-primary/10 transition-colors group"
                 >
                   <div className="p-3 rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
@@ -255,7 +180,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <p className="text-sm text-muted-foreground">Phone</p>
-                    <p className="text-lg font-medium text-foreground">07975 945831</p>
+                    <p className="text-lg font-medium text-foreground">+44 7748 113636</p>
                   </div>
                 </a>
 
@@ -274,7 +199,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Service Areas Map Placeholder */}
+            {/* Service Areas */}
             <div className="glass-card">
               <h3 className="font-serif text-2xl text-foreground mb-4">Service Areas</h3>
               <p className="text-muted-foreground mb-4">

@@ -9,8 +9,8 @@ const About = () => {
               <p className="text-primary font-medium tracking-wide uppercase text-sm">
                 About Me
               </p>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground">Your Guide Through Life's
-Beautiful Moments<span className="block text-primary">Beautiful Moments</span>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground">
+                Life's Beautiful Moments
               </h2>
             </div>
 
@@ -50,7 +50,7 @@ Beautiful Moments<span className="block text-primary">Beautiful Moments</span>
             color: "text-sky"
           }, {
             icon: Leaf,
-            title: "Bespoke Storytelling",
+            title: "Storytelling",
             description: "No two ceremonies are alike. Each one is crafted to reflect your unique journey and personality.",
             color: "text-water"
           }].map((value, index) => <div key={value.title} className="glass-card flex gap-5 items-start group hover:shadow-glow transition-all duration-500" style={{
@@ -60,9 +60,9 @@ Beautiful Moments<span className="block text-primary">Beautiful Moments</span>
                   <value.icon className="w-6 h-6" />
                 </div>
                 <div>
-                  <h3 className="font-serif text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
+                  <h4 className="font-serif text-xl text-foreground mb-2 group-hover:text-primary transition-colors">
                     {value.title}
-                  </h3>
+                  </h4>
                   <p className="text-muted-foreground text-sm leading-relaxed">
                     {value.description}
                   </p>

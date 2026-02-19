@@ -11,39 +11,15 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    quote: "Heather made our wedding ceremony absolutely magical. Her warmth and attention to detail created a day we'll treasure forever.",
-    author: "Sarah & James",
-    service: "Wedding Ceremony",
+    quote: "I have great pleasure in writing this testimonial, relating to a Eulogy written for my Niece by Heather Bliss. The collecting of the information required from me was sympathetically gathered and put together in such a way, that when delivered gave a lovely story of Jane's life. Thank you for all your care and consideration both in the collecting and delivery of the Eulogy.",
+    author: "Kevin S",
+    service: "Eulogy",
   },
   {
     id: 2,
-    quote: "During the most difficult time, Heather helped us celebrate Mum's life with dignity and love. We couldn't have asked for a more compassionate guide.",
-    author: "The Thompson Family",
+    quote: "Heather Bliss wrote a beautifully crafted funeral and included poems and readings that were so relevant to my mother's life. We changed the music and added various family tributes that were not in the original brief, and Heather was able to alter the running order with no issues, whilst also providing us with gentle advice to ensure that we kept to the 40 minutes! I would highly recommend Heather for her kind and caring manner and her flexibility in an ever-changing brief.",
+    author: "Neil B",
     service: "Funeral Service",
-  },
-  {
-    id: 3,
-    quote: "Our vow renewal was everything we dreamed of. Heather captured our journey perfectly and made the ceremony deeply personal.",
-    author: "Michael & Linda",
-    service: "Vow Renewal",
-  },
-  {
-    id: 4,
-    quote: "From our first meeting, Heather listened with such care. She understood exactly what we wanted and delivered beyond expectations.",
-    author: "Emma & David",
-    service: "Wedding Ceremony",
-  },
-  {
-    id: 5,
-    quote: "Heather's gentle guidance helped us honour Dad's memory beautifully. She was a true professional with a genuine heart.",
-    author: "The Patterson Family",
-    service: "Memorial Service",
-  },
-  {
-    id: 6,
-    quote: "Twenty-five years together celebrated perfectly. Heather made us fall in love all over again with her beautiful words.",
-    author: "Robert & Christine",
-    service: "Vow Renewal",
   },
 ];
 

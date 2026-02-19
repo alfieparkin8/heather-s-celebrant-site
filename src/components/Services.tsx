@@ -63,21 +63,20 @@ const Services = () => {
           <p className="text-primary font-medium tracking-wide uppercase text-sm mb-4">
             Services
           </p>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground mb-4">
-            Ceremonies for Life's
-            <span className="block text-primary">Most Precious Moments</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground">
+            Precious Moments
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg mt-4">
             Every ceremony is crafted with care, attention to detail, and a deep 
             respect for the moment you're marking.
           </p>
         </div>
 
-        {/* Celebrations Section */}
-        <div className="mb-16">
+        {/* Weddings & Vow Renewals Section */}
+        <div id="weddings-vows" className="mb-16 scroll-mt-24">
           <div className="flex items-center gap-3 mb-8">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-water to-transparent" />
-            <h3 className="text-xl font-serif text-water px-4">Celebrations of Love</h3>
+            <h3 className="text-xl font-serif text-water px-4">Weddings & Vows</h3>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-water to-transparent" />
           </div>
           
@@ -117,11 +116,11 @@ const Services = () => {
           </div>
         </div>
 
-        {/* Memorial Section */}
-        <div>
+        {/* Funerals & Memorial Services Section */}
+        <div id="funerals-memorials" className="scroll-mt-24">
           <div className="flex items-center gap-3 mb-8">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
-            <h3 className="text-xl font-serif text-primary px-4">Honouring Lives</h3>
+            <h3 className="text-xl font-serif text-primary px-4">Funerals & Memorials</h3>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
           </div>
           

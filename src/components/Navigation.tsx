@@ -1,9 +1,25 @@
 import { useState, useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [location.pathname]);
+
+  const handleNavClick = (href: string) => {
+    setIsOpen(false);
+    // If navigating to the same page, scroll to top anyway
+    if (href === location.pathname) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,20 +31,11 @@ const Navigation = () => {
   }, []);
 
   const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#services", label: "Services" },
-    { href: "#process", label: "Process" },
-    { href: "#contact", label: "Contact" },
+    { href: "/", label: "Home" },
+    { href: "/funerals-memorials", label: "Funerals & Memorials" },
+    { href: "/weddings-vows", label: "Weddings & Vow Renewals" },
+    { href: "/contact", label: "Contact" },
   ];
-
-  const scrollToSection = (href: string) => {
-    setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <nav
@@ -38,31 +45,33 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <button
-          onClick={() => scrollToSection("#home")}
+        <Link
+          to="/"
           className="font-serif text-xl md:text-2xl text-foreground hover:text-primary transition-colors"
         >
           Heather Bliss
-        </button>
+        </Link>
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <button
+            <Link
               key={link.href}
-              onClick={() => scrollToSection(link.href)}
+              to={link.href}
+              onClick={() => handleNavClick(link.href)}
               className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative group"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </button>
+            </Link>
           ))}
-          <button
-            onClick={() => scrollToSection("#contact")}
+          <Link
+            to="/contact"
+            onClick={() => handleNavClick("/contact")}
             className="btn-pill-primary text-sm"
           >
             Get in Touch
-          </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -83,20 +92,22 @@ const Navigation = () => {
       >
         <div className="container mx-auto px-6 py-6 flex flex-col gap-4">
           {navLinks.map((link) => (
-            <button
+            <Link
               key={link.href}
-              onClick={() => scrollToSection(link.href)}
+              to={link.href}
+              onClick={() => handleNavClick(link.href)}
               className="text-left py-2 text-foreground hover:text-primary transition-colors font-medium"
             >
               {link.label}
-            </button>
+            </Link>
           ))}
-          <button
-            onClick={() => scrollToSection("#contact")}
+          <Link
+            to="/contact"
+            onClick={() => handleNavClick("/contact")}
             className="btn-pill-primary text-center mt-2"
           >
             Get in Touch
-          </button>
+          </Link>
         </div>
       </div>
     </nav>

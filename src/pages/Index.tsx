@@ -32,8 +32,10 @@ const Index = () => {
           </div>
         </section>
         
-        <Services />
         <Process />
+        
+        <Services />
+        
         <Contact />
       </main>
       
