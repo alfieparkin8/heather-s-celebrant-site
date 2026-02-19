@@ -1,0 +1,54 @@
+# Node dependencies
+/node_modules/
+
+# Build output (Vite / general)
+/dist/
+/dist-ssr/
+/build/
+/out/
+
+# Vite cache (sometimes created during dev)
+/.vite
+
+# Bun cache (ignore local bun-related folders if present)
+.bun/
+
+# Environment files - keep examples in repo (don't ignore .env.example)
+.env
+.env.*.local
+!.env.example
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+*.log
+
+# TypeScript
+*.tsbuildinfo
+
+# Test coverage
+/coverage/
+/.nyc_output/
+
+# Editor directories and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Caches and temporary folders
+.cache/
+.parcel-cache/
+.sass-cache/
+
+# Misc
+*.tgz
+*.env.local
+
+# -------------------------------------------------
+# NOTE: Do NOT add lockfiles to .gitignore — keep
+# `bun.lockb`, `package-lock.json`, `yarn.lock`, and
+# `pnpm-lock.yaml` committed for reliable installs.
+# -------------------------------------------------
